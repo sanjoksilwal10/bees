@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐝 The World of Honey Bees</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:   #FFB300;
+  --amber:  #FF8F00;
+  --teal:   #00BCD4;
+  --purple: #CE93D8;
+  --green:  #81C784;
+  --pink:   #F48FB1;
+  --lime:   #C6FF00;
+  --bg:      #080808;
+  --card:   #111111;
+  --card2:  #161616;
+  --border: #222222;
+  --text:   #EEEEEE;
+  --muted:  #777777;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, #1c1100 0%, var(--bg) 70%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, #FFB30010 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-bee { font-size: 90px; display: block; margin-bottom: 24px; animation: bob 4s ease-in-out infinite; }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFE082, var(--gold), var(--amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+.hero-sub {
+  max-width: 560px;
+  color: #999;
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin: 0 auto;
+}
+
+/* ── LAYOUT ────────────────────────── */
+.page { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+
+/* ── SECTION WRAPPER ───────────────── */
+.sec { padding: 72px 0; }
+
+.sec-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.sec-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+
+/* ── DIVIDER ───────────────────────── */
+.rule { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #333, transparent); }
+
+/* ── COMPARISON TABLE ──────────────── */
+.tbl-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid #252525; }
+table { width: 100%; border-collapse: collapse; min-width: 580px; }
+thead tr {
+  background: linear-gradient(90deg, #1a1100, #10001a);
+}
+thead th {
+  padding: 16px 20px;
+  text-align: left;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #2a2a2a;
+}
+.th-q  { color: var(--gold); }
+.th-d  { color: var(--teal); }
+.th-w  { color: var(--purple); }
+.th-row{ color: #555; }
+
+tbody tr { background: var(--card); border-bottom: 1px solid var(--border); transition: background .18s; }
+tbody tr:hover { background: #1b1b1b; }
+tbody td { padding: 14px 20px; font-size: 0.92rem; color: #ccc; vertical-align: top; }
+tbody td.row-label { color: var(--muted); font-weight: 600; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; }
+tbody td.q-cell { color: #FFE082; }
+tbody td.d-cell { color: #80DEEA; }
+tbody td.w-cell { color: #E1BEE7; }
+
+/* ── TERM GRID ─────────────────────── */
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
+}
+.term-card {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 20px 22px;
+  border-left: 4px solid var(--gold);
+  transition: transform .2s;
+}
+.term-card:hover { transform: translateY(-3px); }
+.term-word {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.term-def { color: #bbb; font-size: 0.9rem; line-height: 1.65; }
+
+.tc-gold   { border-left-color: var(--gold);   } .tc-gold   .term-word { color: var(--gold);   }
+.tc-teal   { border-left-color: var(--teal);   } .tc-teal   .term-word { color: var(--teal);   }
+.tc-purple { border-left-color: var(--purple); } .tc-purple .term-word { color: var(--purple); }
+.tc-green  { border-left-color: var(--green);  } .tc-green  .term-word { color: var(--green);  }
+.tc-pink   { border-left-color: var(--pink);   } .tc-pink   .term-word { color: var(--pink);   }
+.tc-amber  { border-left-color: var(--amber);  } .tc-amber  .term-word { color: var(--amber);  }
+.tc-lime   { border-left-color: var(--lime);   } .tc-lime   .term-word { color: var(--lime);   }
+
+/* ── HIGHLIGHT BLOCK ───────────────── */
+.hblock {
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+.hb-gold   { background: linear-gradient(135deg,#1a1100,#201500); border-color: #FFB30025; }
+.hb-teal   { background: linear-gradient(135deg,#001115,#00161e); border-color: #00BCD425; }
+.hb-purple { background: linear-gradient(135deg,#120018,#180020); border-color: #CE93D825; }
+.hb-green  { background: linear-gradient(135deg,#001200,#001800); border-color: #81C78425; }
+.hb-pink   { background: linear-gradient(135deg,#1a0010,#200015); border-color: #F48FB125; }
+.hb-amber  { background: linear-gradient(135deg,#1a0d00,#201000); border-color: #FF8F0025; }
+.hb-lime   { background: linear-gradient(135deg,#0e1100,#111500); border-color: #C6FF0025; }
+
+.hblock h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.hb-gold   h3 { color: var(--gold);   }
+.hb-teal   h3 { color: var(--teal);   }
+.hb-purple h3 { color: var(--purple); }
+.hb-green  h3 { color: var(--green);  }
+.hb-pink   h3 { color: var(--pink);   }
+.hb-amber  h3 { color: var(--amber);  }
+.hb-lime   h3 { color: var(--lime);   }
+
+.hblock p  { color: #bbb; font-size: 0.95rem; line-height: 1.75; }
+.hblock p + p { margin-top: 10px; }
+
+/* ── TWO-COL ───────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:620px){ .two-col { grid-template-columns: 1fr; } }
+
+/* ── THREE-COL ─────────────────────── */
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media(max-width:720px){ .three-col { grid-template-columns: 1fr 1fr; } }
+@media(max-width:460px){ .three-col { grid-template-columns: 1fr; } }
+
+/* ── LIFECYCLE TIMELINE ────────────── */
+.timeline { position: relative; padding-left: 56px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 22px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--teal), var(--purple), var(--green));
+  border-radius: 2px;
+}
+.tl-step { position: relative; margin-bottom: 40px; }
+.tl-step:last-child { margin-bottom: 0; }
+.tl-icon {
+  position: absolute; left: -48px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  border: 2px solid;
+  background: var(--bg);
+}
+.tl-icon.g { border-color: var(--gold);   }
+.tl-icon.t { border-color: var(--teal);   }
+.tl-icon.p { border-color: var(--purple); }
+.tl-icon.gr{ border-color: var(--green);  }
+
+.tl-tag { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+.tl-tag.g  { color: var(--gold); }
+.tl-tag.t  { color: var(--teal); }
+.tl-tag.p  { color: var(--purple); }
+.tl-tag.gr { color: var(--green); }
+
+.tl-step h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+.tl-step p  { color: #bbb; font-size: 0.93rem; }
+.tl-step ul { list-style-position: inside; color: #bbb; font-size: 0.9rem; margin-top: 10px; }
+.tl-step li { margin-bottom: 4px; }
+
+/* ── STAT PILLS ────────────────────── */
+.stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.stat-pill {
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+  border: 1px solid var(--border);
+}
+.stat-pill .sicon { font-size: 1.5rem; flex-shrink: 0; }
+.stat-pill p { font-size: 0.88rem; color: #ccc; line-height: 1.45; }
+.stat-pill strong { color: var(--gold); }
+
+/* ── USE LIST ──────────────────────── */
+.use-list { display: flex; flex-direction: column; gap: 10px; }
+.use-row {
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex; align-items: flex-start; gap: 16px;
+  border: 1px solid var(--border);
+  font-size: 0.93rem;
+  color: #bbb;
+}
+.use-row .udot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+/* ── ECO CARDS ─────────────────────── */
+.eco-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.eco-card {
+  background: var(--card2);
+  border-radius: 14px;
+  padding: 24px 22px;
+  border-bottom: 3px solid;
+  transition: transform .2s;
+}
+.eco-card:hover { transform: translateY(-3px); }
+.eco-card .e-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.eco-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: #ddd; }
+.eco-card p  { font-size: 0.87rem; color: #999; line-height: 1.65; }
+
+.ec-gold   { border-bottom-color: var(--gold);   } .ec-gold   .e-num { color: var(--gold);   }
+.ec-teal   { border-bottom-color: var(--teal);   } .ec-teal   .e-num { color: var(--teal);   }
+.ec-purple { border-bottom-color: var(--purple); } .ec-purple .e-num { color: var(--purple); }
+.ec-green  { border-bottom-color: var(--green);  } .ec-green  .e-num { color: var(--green);  }
+.ec-pink   { border-bottom-color: var(--pink);   } .ec-pink   .e-num { color: var(--pink);   }
+.ec-amber  { border-bottom-color: var(--amber);  } .ec-amber  .e-num { color: var(--amber);  }
+
+/* ── FOOTER ────────────────────────── */
+footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: #444;
+  font-size: 0.82rem;
+  border-top: 1px solid #1a1a1a;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <span class="hero-bee">🐝</span>
+  <h1>The World of Honey Bees</h1>
+  <p class="hero-sub">Everything you need to know about the most important insect on Earth — how they live, what they do, and why we need them.</p>
+</div>
+
+<div class="rule"></div>
+
+<div class="page">
+
+  <!-- ════════ 1. COMPARISON TABLE ════════ -->
+  <section class="sec">
+    <p class="sec-eyebrow" style="color:var(--gold)">🐝 The Colony</p>
+    <h2 class="sec-title">Comparing Queen, Drone & Worker Bees</h2>
+    <p style="color:#999; margin-bottom:28px; font-size:0.95rem;">A honey bee colony has three kinds of bees. Each one looks different, lives for a different length of time, and does a completely different job. Here is a quick side-by-side look.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="th-row">Feature</th>
+            <th class="th-q">👑 Queen</th>
+            <th class="th-d">🐝 Drone</th>
+            <th class="th-w">⚒️ Worker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Size</td>
+            <td class="q-cell">Largest bee in the hive</td>
+            <td class="d-cell">Medium-sized</td>
+            <td class="w-cell">Smallest bee</td>
+          </tr>
+          <tr>
+            <td class="row-label">Stinger</td>
+            <td class="q-cell">Yes — can sting many times</td>
+            <td class="d-cell">No stinger at all</td>
+            <td class="w-cell">Yes — but only once</td>
+          </tr>
+          <tr>
+            <td class="row-label">Lifespan</td>
+            <td class="q-cell">2 to 5 years</td>
+            <td class="d-cell">About 2 months; dies after mating or is driven out in winter</td>
+            <td class="w-cell">6 weeks to 6 months</td>
+          </tr>
+          <tr>
+            <td class="row-label">Main Job</td>
+            <td class="q-cell">Lay eggs and lead the colony</td>
+            <td class="d-cell">Mate with the queen</td>
+            <td class="w-cell">Build, collect food, protect, nurse larvae</td>
+          </tr>
+          <tr>
+            <td class="row-label">How Many?</td>
+            <td class="q-cell">Usually just 1 per hive</td>
+            <td class="d-cell">Up to 500</td>
+            <td class="w-cell">20,000 – 80,000 depending on the species</td>
+          </tr>
+          <tr>
+            <td class="row-label">Sex</td>
+            <td class="q-cell">Female</td>
+            <td class="d-cell">Male</td>
+            <td class="w-cell">Female</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ════════ 2. KEY TERMINOLOGIES ════════ -->
+  <section class="sec">
+    <p class="sec-eyebrow" style="color:var(--teal)">🔑 New Words</p>
+    <h2 class="sec-title">Key Terminologies</h2>
+    <p style="color:#999; margin-bottom:28px; font-size:0.95rem;">Before reading further, learn these important words. They will appear again and again throughout this guide.</p>
+
+    <div class="term-grid">
+      <div class="term-card tc-teal">
+        <div class="term-word">Metamorphosis</div>
+        <div class="term-def">The process of changing shape through different stages of life. Honey bees go through <em>complete metamorphosis</em>: Egg → Larva → Pupa → Adult.</div>
+      </div>
+      <div class="term-card tc-teal">
+        <div class="term-word">Histolysis</div>
+        <div class="term-def">Histolysis is the process in which old, damaged, or unnecessary tissues are broken down and dissolved. It commonly occurs during metamorphosis.</div>
+      </div>
+      <div class="term-card tc-teal">
+        <div class="term-word">Histogenesis</div>
+        <div class="term-def">Histogenesis is the process of forming and developing new tissues from cells. During growth and development, new tissues are produced to replace old ones or to create new body structures.</div>
+      </div>       
+      <div class="term-card tc-teal">
+        <div class="term-word">Moulting</div>
+        <div class="term-def">Moulting is the process in which a honey bee larva sheds its old outer skin and develops a new, larger one to allow growth.</div>
+      </div>       
+    </div>
+  </section>
+
+      
+  <div class="rule"></div>
+
+  <!-- ════════ 5. LIFE CYCLE ════════ -->
+  <section class="sec">
+    <p class="sec-eyebrow" style="color:var(--green)">🔄 Development</p>
+    <h2 class="sec-title">Life Cycle of a Honey Bee</h2>
+
+    <div class="hblock hb-green" style="margin-bottom:36px">
+      <h3>What Is Complete Metamorphosis?</h3>
+      <p>Honey bees grow through <strong style="color:var(--green)">four completely different stages</strong>. Each stage looks and behaves nothing like the previous one. This kind of total change is called <em>complete metamorphosis</em>. The four stages are: <strong style="color:var(--green)">Egg → Larva → Pupa → Adult</strong>. All of these stages happen inside the honeycomb cells in the hive.</p>
+    </div>
+    
+    <div class="timeline">
+      <!-- Stage 1 -->
+      <div class="tl-step">
+        <div class="tl-icon g">🥚</div>
+        <p class="tl-tag g">Stage 1 — Egg</p>
+        <div class="image-box" style="margin: 10px 0;">
+          <img src="e.jpeg" width="300" alt="Egg">
+        </div>
+        <h3>The Egg</h3>
+        <p>The egg is the first stage in the life cycle of a honey bee. Honey bee eggs are white, elongated, and about 1.5 mm long.</p>
+        <ul>
+          <li>Eggs are laid by the queen bee inside cells of the honeycomb.</li>
+          <li> Its size is about 1 to 1.5 mm .</li>
+          <li>On the first day, the egg stands upright in the cell.</li>
+          <li>On the second day, it bends slightly.</li>
+          <li>On the third day, it lies flat at the bottom of the cell.</li>
+          <li>The queen can control whether an egg is fertilized or unfertilized.</li>
+          <li>Fertilized eggs develop into female bees (workers or queens).</li>
+          <li>Unfertilized eggs develop into male bees (drones).</li>
+          <li>After about 3 days, the egg hatches into a larva.</li>
+        </ul>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="tl-step">
+        <div class="tl-icon t">🐛</div>
+        <p class="tl-tag t">Stage 2 — Larva</p>
+        <div class="image-box" style="margin: 10px 0;">
+          <img src="l.jpeg" alt="Honey Bee Larva" width="300">
+        </div>
+        <h3>The Larva</h3>
+        <p>The larva is the second stage of the honey bee life cycle. It is a white, worm-like, legless stage that grows rapidly.</p>
+        <ul>
+          <li>The larva emerges from the egg after about 3 days.</li>
+          <li>It remains inside the brood cell during this stage.</li>
+          <li>The larval stage usually lasts 5–7 days.</li>
+          <li>Larvae feed continuously and grow very quickly.</li>
+          <li>Worker larvae are fed royal jelly for a short period and then bee bread.</li>
+          <li>Queen larvae are fed royal jelly throughout their larval stage.</li>
+          <li>Drone larvae receive a mixture of pollen and honey.</li>
+          <li>The type of food determines whether the larva becomes a queen, worker, or drone.</li>
+          <li>The larva moults several times as it grows.</li>
+          <li>At the end of this stage, it prepares for pupation.</li>
+        </ul>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="tl-step">
+        <div class="tl-icon p">🫘</div>
+        <p class="tl-tag p">Stage 3 — Pupa</p>
+        <div class="image-box" style="margin: 10px 0;">
+          <img src="p.jpg" alt="Honey Bee Pupa" width="300">
+        </div>
+        <h3>The Pupa</h3>
+        <p>The pupa is the third stage of the honey bee life cycle. During this stage, the larva changes into an adult bee.</p>
+        <ul>
+          <li>The pupal stage lasts about 7–15 days depending on the type of bee.</li>
+          <li>The larva spins a cocoon and becomes inactive.</li>
+          <li>Major body changes take place inside the sealed cell.</li>
+          <li>Old larval tissues break down through a process called <strong>histolysis</strong>.</li>
+          <li>New adult tissues develop through <strong>histogenesis</strong>.</li>
+          <li>Legs, wings, antennae, eyes, and other organs are formed.</li>
+          <li>The pupa gradually develops the appearance of an adult bee.</li>
+          <li>At the end of this stage, the fully developed bee emerges from the cell.</li>
+        </ul>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="tl-step">
+        <div class="tl-icon gr">🐝</div>
+        <p class="tl-tag gr">Stage 4 — Adult</p>
+        <div class="image-box" style="margin: 10px 0;">
+          <img src="a.jpeg" alt="Adult Bee" width="300">
+        </div>
+        <h3>The Adult Bee</h3>
+        <p>The adult stage is the final stage in the life cycle of a honey bee. Adult bees emerge from the brood cell and begin their duties.</p>
+        <ul>
+          <li>The adult bee comes out by breaking the wax cap of the cell.</li>
+          <li>Honey bee colonies contain three types of adults: queen, worker, and drone.</li>
+          <li>The queen bee is the only fertile female and lays eggs.</li>
+          <li>Worker bees are sterile females that perform all colony tasks.</li>
+          <li>Drones are male bees whose main role is to mate with the queen.</li>
+          <li>The life span varies among queens, workers, and drones.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:32px">
+      <div class="hblock hb-pink" style="margin-bottom:0">
+        <h3>⏱️ Time Table</h3>
+        <p><strong style="color:var(--pink)">Queen:</strong> 16 days total (egg 3 + larva 5 + pupa 8)<br>
+           <strong style="color:var(--pink)">Worker:</strong> 21 days total (egg 3 + larva 6 + pupa 12)<br>
+           <strong style="color:var(--pink)">Drone:</strong> 24 days total (egg 3 + larva 7 + pupa 14)</p>
+      </div>
+      <div class="hblock hb-gold" style="margin-bottom:0">
+        <h3>🍯 Royal Jelly — The Queen Maker</h3>
+        <p>The only thing that makes a bee become a queen is being fed royal jelly throughout her entire larva stage. It is richer in proteins and sugars than the food given to worker larvae, and it triggers different genes to switch on.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ════════ 6. HONEY MAKING ════════ -->
+  <section class="sec">
+    <p class="sec-eyebrow" style="color:var(--amber)">🍯 Production</p>
+    <h2 class="sec-title">How Is Honey Made?</h2>
+
+    <div class="hblock hb-amber" style="margin-bottom:24px">
+      <h3>🌸 Step 1 — Collecting Nectar</h3>
+      <p>Forager worker bees fly out and visit hundreds of flowers. They use their long tongues to suck nectar out of flowers and store it in a special second stomach called the <strong style="color:var(--amber)">honey stomach</strong> (or honey crop). A forager can visit up to <strong style="color:var(--amber)">1,500 flowers</strong> in a single trip and carries roughly half her own body weight in nectar when she returns.</p>
+    </div>
+
+    <div class="hblock hb-gold" style="margin-bottom:24px">
+      <h3>🔬 Step 2 — Adding Enzymes</h3>
+      <p>Back at the hive, the forager passes the nectar to a house bee by mouth. The bees chew and pass the nectar between them many times. During this process, <strong style="color:var(--gold)">enzymes</strong> from the bees' mouths break the nectar's complex sugars into simpler ones (glucose and fructose). These simpler sugars are what make honey sweet, long-lasting, and safe to eat.</p>
+    </div>
+
+    <div class="hblock hb-teal" style="margin-bottom:24px">
+      <h3>💨 Step 3 — Removing Water</h3>
+      <p>The nectar is placed into open honeycomb cells. Worker bees fan their wings rapidly over the cells to create airflow. This evaporates the water content — nectar starts at about <strong style="color:var(--teal)">80% water</strong> and honey ends at only <strong style="color:var(--teal)">17–20% water</strong>. This low water content is exactly what stops bacteria from growing and allows honey to last for thousands of years.</p>
+    </div>
+
+    <div class="hblock hb-purple" style="margin-bottom:24px">
+      <h3>🔒 Step 4 — Sealing With Wax</h3>
+      <p>Once the honey is thick and ripe, bees cover each cell with a thin layer of <strong style="color:var(--purple)">beeswax</strong> to seal it. This is how you know the honey is ready. Sealed honey can be stored indefinitely — archaeologists have found 3,000-year-old honey in Egyptian tombs that was still perfectly edible.</p>
+    </div>
+
+    <h3 style="font-family:Orbitron,sans-serif;color:var(--gold);font-size:1rem;margin-bottom:16px;">📊 What Is Honey Made Of?</h3>
+    <div class="stat-row">
+      <div class="stat-pill"><span class="sicon">🍬</span><p><strong>~38%</strong> fructose (fruit sugar)</p></div>
+      <div class="stat-pill"><span class="sicon">🍬</span><p><strong>~31%</strong> glucose (fast energy sugar)</p></div>
+      <div class="stat-pill"><span class="sicon">💧</span><p><strong>~17%</strong> water — low enough to stop bacteria</p></div>
+      <div class="stat-pill"><span class="sicon">🔬</span><p><strong>~14%</strong> other sugars, acids, enzymes</p></div>
+      <div class="stat-pill"><span class="sicon">🌿</span><p>Vitamins B2, B3, B5, B6, C and minerals like calcium, iron, zinc</p></div>
+      <div class="stat-pill"><span class="sicon">🦠</span><p>Natural antibacterial compounds — honey kills germs</p></div>
+    </div>
+
+    <div class="hblock hb-green" style="margin-top:8px">
+      <h3>🐝 Did You Know — Beeswax</h3>
+      <p>Worker bees produce beeswax from glands on the underside of their abdomen. They use it to build the honeycomb. It takes about <strong style="color:var(--green)">8 kg of honey</strong> for bees to produce just <strong style="color:var(--green)">1 kg of beeswax</strong>. Beeswax is used in candles, lip balms, lotions, polish, and waterproofing products.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ════════ 7. USES OF HONEY ════════ -->
+  <section class="sec">
+    <p class="sec-eyebrow" style="color:var(--pink)">🍯 Uses</p>
+    <h2 class="sec-title">How Do Humans Use Honey & Bee Products?</h2>
+
+    <div class="use-list" style="margin-bottom:32px">
+      <div class="use-row"><div class="udot" style="background:var(--gold)"></div><div><strong style="color:var(--gold)">Food and sweetener:</strong> Honey is used in cooking, baking, teas, desserts, and as a healthy replacement for sugar. It is consumed by both humans and bees.</div></div>
+      <div class="use-row"><div class="udot" style="background:var(--teal)"></div><div><strong style="color:var(--teal)">Medicine:</strong> Honey has been used as a medicine for over 2,000 years. It helps heal wounds, soothe sore throats, and fight infections because it kills certain types of bacteria.</div></div>
+      <div class="use-row"><div class="udot" style="background:var(--purple)"></div><div><strong style="color:var(--purple)">Skincare and cosmetics:</strong> Honey, beeswax, and royal jelly are all used in face creams, lip balms, shampoos, moisturisers, and soaps because they are gentle and nourishing for the skin.</div></div>
+      <div class="use-row"><div class="udot" style="background:var(--green)"></div><div><strong style="color:var(--green)">Energy source:</strong> Because honey is rich in simple sugars, it gives the body quick energy. Athletes and workers often use honey as a natural energy boost.</div></div>
+      <div class="use-row"><div class="udot" style="background:var(--pink)"></div><div><strong style="color:var(--pink)">Candles and polish:</strong> Beeswax is used to make candles that burn cleanly and slowly. It is also used in shoe polish, furniture polish, and wood sealant.</div></div>
+      <div class="use-row"><div class="udot" style="background:var(--amber)"></div><div><strong style="color:var(--amber)">Royal Jelly supplements:</strong> Royal jelly is sold in pharmacies and health shops. People take it to help with blood pressure, immune health, and skin health.</div></div>
+      <div class="use-row"><div class="udot" style="background:var(--lime)"></div><div><strong style="color:var(--lime)">Propolis:</strong> Bees make a sticky substance called propolis from tree resin. It is used inside the hive to seal gaps and kill germs. Humans use it in throat sprays, toothpastes, and herbal medicines.</div></div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ════════ 8. ECONOMIC IMPORTANCE ════════ -->
+  <section class="sec">
+    <p class="sec-eyebrow" style="color:var(--lime)">💰 Economy</p>
+    <h2 class="sec-title">Economic Importance of Honey Bees</h2>
+
+    <div class="hblock hb-lime" style="margin-bottom:28px">
+      <h3>🌱 Why Bees Are Worth Billions</h3>
+      <p>Honey bees are not just important for making honey — they are one of the most economically valuable animals on Earth. Their work as <strong style="color:var(--lime)">pollinators</strong> keeps entire farming industries alive. Globally, bees contribute an estimated <strong style="color:var(--lime)">$300 billion (USD) per year</strong> to world food production through pollination alone. Without bees, most fruits, vegetables, nuts, and seeds that humans eat every day would disappear or become extremely expensive.</p>
+    </div>
+
+    <div class="eco-grid" style="margin-bottom:28px">
+      <div class="eco-card ec-gold">
+        <div class="e-num">$300B+</div>
+        <h4>Annual Pollination Value</h4>
+        <p>The total value of crops that depend on bee pollination worldwide. This includes almonds, apples, strawberries, avocados, blueberries, coffee, and hundreds more crops that billions of people eat every day.</p>
+      </div>
+
+      <div class="eco-card ec-teal">
+        <div class="e-num">⅓</div>
+        <h4>Of All Human Food</h4>
+        <p>Roughly one-third of all food eaten by humans comes from plants that are pollinated by bees. If bees disappeared, supermarkets would lose a huge portion of their produce sections almost immediately.</p>
+      </div>
+
+      <div class="eco-card ec-purple">
+        <div class="e-num">$9B+</div>
+        <h4>Global Honey Industry</h4>
+        <p>The worldwide honey market is worth over $9 billion per year and is growing. China, Turkey, Argentina, Ukraine, and the USA are among the biggest producers. Beekeeping is a major income source for millions of farming families worldwide.</p>
+      </div>
+
+      <div class="eco-card ec-green">
+        <div class="e-num">100+</div>
+        <h4>Crops That Need Bees</h4>
+        <p>More than 100 major crops — including almonds (90% dependent on bees), cocoa (chocolate), apples, mangoes, coconuts, sunflowers, and cotton — can only be properly pollinated by bees. Many of these crops are worth hundreds of millions of dollars per country.</p>
+      </div>
+
+      <div class="eco-card ec-pink">
+        <div class="e-num">🐝</div>
+        <h4>Beekeeping as Livelihood</h4>
+        <p>Beekeeping (apiculture) is a profession and a source of income for millions of families, especially in developing countries. A single beekeeper can manage dozens of hives and earn a stable income from honey, beeswax, royal jelly, propolis, and bee pollen.</p>
+      </div>
+
+      <div class="eco-card ec-amber">
+        <div class="e-num">🌿</div>
+        <h4>Supporting Agriculture</h4>
+        <p>Farmers often <em>rent</em> hives of bees during flowering season to improve crop yields. For example, almond farmers in California pay beekeepers to bring billions of bees to their orchards every year. Without rented bees, almond production would collapse entirely.</p>
+      </div>
+    </div>
+
+     <div class="hblock hb-teal" style="margin-bottom:16px">
+    <h3>🌎 Bees & Biodiversity</h3>
+    <p>Bees do not just support human farming — they support entire ecosystems. Wild flowers, trees, and plants that animals eat all depend on bee pollination. When bees thrive, forests and grasslands thrive. When bee populations fall (due to pesticides, disease, or habitat loss), entire food chains are affected — from insects to birds to large mammals. Protecting bees is not just about honey; it is about keeping the natural world alive.</p>
+  </div>
+
+  <div class="hblock hb-purple">
+    <h3>⚠️ What Happens If Bee Numbers Drop?</h3>
+    <p>In recent decades, bee populations in many parts of the world have been declining due to <strong style="color:var(--purple)">pesticide use, habitat destruction, disease, and climate change</strong>. Scientists call this Colony Collapse Disorder. When large numbers of bees die, crop yields fall, food prices rise, and many wild plant species can no longer reproduce. Countries around the world are now passing laws to protect bees because losing them would be an economic and ecological disaster.</p>
+  </div>
+</section>
+
+
+</div>
+
+
+</body>
+</html>
